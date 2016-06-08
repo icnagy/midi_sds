@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Midi SDS transfer tool</title>
+    <meta name="description" content="A simple web app using WebMidi to send samples to SDS capable synths/samplers">
+    <meta name="keywords" content="midi sds sample tool upload wav wave">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        Midi SDS transfer tool
+      </h1>
+    </header>
+
+    <main>
+      <p class="bold">Oh hi,</p>
+
+      <label for="midi_port_select">Select Midi Port:</label>
+      <select id="midi_port_select">
+      </select>
+
+      <label for="midi_channel_select">Midi Channel:</label>
+      <select id="midi_channel_select">
+        <option value=0>0</option>        <option value=1>1</option>        <option value=2>2</option>        <option value=3>3</option>
+        <option value=4>4</option>        <option value=5>5</option>        <option value=6>6</option>        <option value=7>7</option>
+        <option value=8>8</option>        <option value=9>9</option>        <option value=10>10</option>        <option value=11>11</option>
+        <option value=12>12</option>        <option value=13>13</option>        <option value=14>14</option>        <option value=15>15</option>
+        <option value=16>16</option>
+      </select>
+
+      <!--<label for="starting_sample_number">Starting sample number:</label>-->
+      <!--<input id="starting_sample_number" size="3"/>-->
+      <div id="step_one">
+        <h2>1. Upload your samples</h2>
+        <div id="drop_target">
+          <p>Drop your samples here</p>
+        </div>
+      </div>
+
+      <div id="step_two">
+        <h2>2. Transfer your samples</h2>
+        <p id="buttons_help_text">Press the buttons in low-to-high key order and wait for the transfer to complete.</p>
+        <div id="sample_transfer_buttons">
+        </div>
+      </div>
+
+      <div id="step_three">
+        <h2>3. Set root note and keyspan</h2>
+        <p id="settings_help">When the transfer is finished set the base note and the keyspan on the DPM. When finished, press EXEC to save the settings then EXEC again to save the sample name. Then press the next sample transfer button.</p>
+        <p id="about_multisampling">If you want to do a multisampled patch/drumkit set the keyspan to be less than A0>G9. In that case the next transfered sample will be allocated for the same patch. For more information please refer to the DPM V3 owener's manual page 6.5 step 12.</p>
+      </div>
+    </main>
+
+    <footer>
+      <div id="midi_log">
+      </div>
+      <p>(C) 2016 <a href="https://twitter.com/icnagy" target="_blank">Csaba Nagy</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+
+  </body>
+</html>
