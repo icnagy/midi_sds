@@ -180,7 +180,12 @@ if (window.File && window.FileList && window.FileReader) {
     filedrag.style.display = "block";
   }
 }
-navigator.requestMIDIAccess( { sysex: true } ).then( onMIDISuccess, onMIDIFailure );
+
+if(navigator.requestMIDIAccess != undefined) {
+  navigator.requestMIDIAccess( { sysex: true } ).then( onMIDISuccess, onMIDIFailure );
+} else {
+  alert("Your browser is probably not supported. Please try Chrome.");
+}
 
 // SDS: http://www.4front-tech.com/pguide/midi/midi8.html && http://www.personal.kent.edu/~sbirch/Music_Production/MP-II/MIDI/midi_sample_dump_standard_messag.htm
 
