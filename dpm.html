@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DPM V3 Editor</title>
+    <meta name="description" content="A simple webmidi patch editor for Peavey DPM V3 synth">
+    <meta name="keywords" content="webmidi peavey dpm v3 patch editor">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        Peavey DPM V3
+      </h1>
+    </header>
+
+    <main>
+      <p class="bold">Oh hi,</p>
+
+      <label for="midi_port_select">Select Midi Port:</label>
+      <select id="midi_port_select"></select>
+
+      <label for="midi_channel_select">Midi Channel:</label>
+      <select id="midi_channel_select">
+        <option value=0>0</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option><option value=6>6</option><option value=7>7</option><option value=8>8</option><option value=9>9</option><option value=10>10</option><option value=11>11</option><option value=12>12</option><option value=13>13</option><option value=14>14</option><option value=15>15</option><option value=16>16</option>
+      </select>
+
+    <div class="patch_number">
+      <h1>Patch Number</h1>
+      <input type="text" value="0" name="patch_number">
+    </div>
+
+    <div class="patch_name">
+      <h1>Patch Name</h1>
+      <input type="text" value="patch0000001" size="12" maxlength="12" name="patch_name">
+    </div>
+
+    <div id="osc1_param_group">
+      <h2>OSC1</h2>
+      <div id="param_osc1_waveshape">
+        <label for="osc1_waveshape">OSC1 Wave</label>
+        <input name="osc1_waveshape" type="range" value="0" min="0" max="142" data-id="13"/>
+      </div>
+      <div id="param_osc1_coarse_tune">
+        <label for="osc1_coarse_tune">OSC1 Coarse</label>
+        <input name="osc1_coarse_tune" type="range" min="-24" max="+24" data-id="14"/>
+      </div>
+      <div id="param_osc1_fine_tune">
+        <label for="osc1_fine_tune">osc1 fine_tune</label>
+        <input name="osc1_fine_tune" type="range" min="-99" max="99" data-id="15"/>
+      </div>
+      <div id="param_osc1_pitch_mod1">
+        <label for="osc1_pitch_mod1">osc1 pitch_mod1</label>
+        <input name="osc1_pitch_mod1" type="range" min="0" max="12" data-id="16"/>
+      </div>
+      <div id="param_osc1_sensitivity_to_mod1">
+        <label for="osc1_sensitivity_to_mod1">osc1 sensitivity_to_mod1</label>
+        <input name="osc1_sensitivity_to_mod1" type="range" min="-99" max="99" data-id="17"/>
+      </div>
+      <div id="param_osc1_pitch_mod2">
+        <label for="osc1_pitch_mod2">osc1 pitch_mod2</label>
+        <input name="osc1_pitch_mod2" type="range" min="0" max="12" data-id="18"/>
+      </div>
+      <div id="param_osc1_sensitivity_to_mod2">
+        <label for="osc1_sensitivity_to_mod2">osc1 sensitivity_to_mod2</label>
+        <input name="osc1_sensitivity_to_mod2" type="range" min="-99" max="99" data-id="19"/>
+      </div>
+      <div id="param_dca1_level_scalar">
+        <label for="dca1_level_scalar">dca1_level_scalar</label>
+        <input name="dca1_level_scalar" type="range" min="0" max="99" data-id="20"/>
+      </div>
+      <div id="param_dca1_level_mod1">
+        <label for="dca1_level_mod1">dca1_level_mod1</label>
+        <input name="dca1_level_mod1" type="range" min="0" max="12" data-id="21"/>
+      </div>
+      <div id="param_dca1_sensitivity_to_mod1">
+        <label for="dca1_sensitivity_to_mod1">dca1_sensitivity_to_mod1</label>
+        <input name="dca1_sensitivity_to_mod1" type="range" min="0" max="99" data-id="22"/>
+      </div>
+      <div id="param_dca1_level_mod2">
+        <label for="dca1_level_mod2">dca1_level_mod2</label>
+        <input name="dca1_level_mod2" type="range" min="0" max="12" data-id="23"/>
+      </div>
+      <div id="param_dca1_sensitivity_to_mod2">
+        <label for="dca1_sensitivity_to_mod2">dca1_sensitivity_to_mod2</label>
+        <input name="dca1_sensitivity_to_mod2" type="range" min="0" max="99" data-id="24"/>
+      </div>
+    </div>
+    <div id="osc2_param_group">
+      <h2>OSC2</h2>
+      <div id="param_osc2_waveshape">
+        <label for="osc2_waveshape">OSC2 Wave</label>
+        <input name="osc2_waveshape" type="range" value="0" min="0" max="142" data-id="25"/>
+      </div>
+      <div id="param_osc2_coarse_tune">
+        <label for="osc2_coarse_tune">OSC2 Coarse</label>
+        <input name="osc2_coarse_tune" type="range" min="-24" max="+24" data-id="26"/>
+      </div>
+      <div id="param_osc2_fine_tune">
+        <label for="osc2_fine_tune">osc2 fine_tune</label>
+        <input name="osc2_fine_tune" type="range" min="-99" max="99" data-id="27"/>
+      </div>
+      <div id="param_osc2_pitch_mod1">
+        <label for="osc2_pitch_mod1">osc2 pitch_mod1</label>
+        <input name="osc2_pitch_mod1" type="range" min="0" max="12" data-id="28"/>
+      </div>
+      <div id="param_osc2_sensitivity_to_mod1">
+        <label for="osc2_sensitivity_to_mod1">osc2 sensitivity_to_mod1</label>
+        <input name="osc2_sensitivity_to_mod1" type="range" min="-99" max="99" data-id="29"/>
+      </div>
+      <div id="param_osc2_pitch_mod2">
+        <label for="osc2_pitch_mod2">osc2 pitch_mod2</label>
+        <input name="osc2_pitch_mod2" type="range" min="0" max="12" data-id="30"/>
+      </div>
+      <div id="param_osc2_sensitivity_to_mod2">
+        <label for="osc2_sensitivity_to_mod2">osc2 sensitivity_to_mod2</label>
+        <input name="osc2_sensitivity_to_mod2" type="range" min="-99" max="99" data-id="31"/>
+      </div>
+      <div id="param_dca2_level_scalar">
+        <label for="dca2_level_scalar">dca2_level_scalar</label>
+        <input name="dca2_level_scalar" type="range" min="0" max="99" data-id="32"/>
+      </div>
+      <div id="param_dca2_level_mod1">
+        <label for="dca2_level_mod1">dca2_level_mod1</label>
+        <input name="dca2_level_mod1" type="range" min="0" max="12" data-id="33"/>
+      </div>
+      <div id="param_dca2_sensitivity_to_mod1">
+        <label for="dca2_sensitivity_to_mod1">dca2_sensitivity_to_mod1</label>
+        <input name="dca2_sensitivity_to_mod1" type="range" min="0" max="99" data-id="34"/>
+      </div>
+      <div id="param_dca2_level_mod2">
+        <label for="dca2_level_mod2">dca2_level_mod2</label>
+        <input name="dca2_level_mod2" type="range" min="0" max="12" data-id="35"/>
+      </div>
+      <div id="param_dca2_sensitivity_to_mod2">
+        <label for="dca2_sensitivity_to_mod2">dca2_sensitivity_to_mod2</label>
+        <input name="dca2_sensitivity_to_mod2" type="range" min="0" max="99" data-id="36"/>
+      </div>
+    </div>
+    <div class="filter_params">
+      <h2>Filter</h2>
+      <div class="param_filter_resonance">
+        <label for="filter_resonance">Filter Resonance</label>
+        <input name="filter_resonance" type="range" min="0" max="99" data-id="37"/>
+      </div>
+      <div class="param_filter_cutoff">
+        <label for="filter_cutoff">Filter cutoff</label>
+        <input name="filter_cutoff" type="range" min="0" max="99" data-id="38"/>
+      </div>
+
+      <div class="param_filter_cutoff_mod1">
+        <label for="filter_cutoff_mod1">Filter cutoff Mod1</label>
+        <input name="filter_cutoff_mod1" type="range" min="0" max="12" data-id="39"/>
+      </div>
+      <div id="param_filter_cutoff_sensitivity_to_mod1">
+        <label for="filter_cutoff_sensitivity_to_mod1">filter_cutoff_sensitivity_to_mod1</label>
+        <input name="filter_cutoff_sensitivity_to_mod1" type="range" min="-99" max="99" data-id="40"/>
+      </div>
+
+      <div class="param_filter_cutoff_mod2">
+        <label for="filter_cutoff_mod2">Filter cutoff Mod2</label>
+        <input name="filter_cutoff_mod2" type="range" min="0" max="12" data-id="41"/>
+      </div>
+      <div id="param_filter_cutoff_sensitivity_to_mod2">
+        <label for="filter_cutoff_sensitivity_to_mod2">filter_cutoff_sensitivity_to_mod2</label>
+        <input name="filter_cutoff_sensitivity_to_mod2" type="range" min="-99" max="99" data-id="42"/>
+      </div>
+    </div>
+
+    <div class="env1_params">
+      <h2>ENV1</h2>
+      <div class="param_env1_level_vel_sens">
+        <label for="param_env1_level_vel_sens">ENV1 Level Vel Sens</label>
+        <input name="param_env1_level_vel_sens" type="range" min="-99" max="99" data-id="43"/>
+      </div>
+      <div class="param_env1_level_kbd_sens">
+        <label for="param_env1_level_kbd_sens">ENV1 Level Kbd Sens</label>
+        <input name="param_env1_level_kbd_sens" type="range" min="-99" max="99" data-id="44"/>
+      </div>
+      <div class="param_env1_time1_vel_sens">
+        <label for="param_env1_time1_vel_sens">ENV1 Time1 Vel Sens</label>
+        <input name="param_env1_time1_vel_sens" type="range" min="-99" max="99" data-id="45"/>
+      </div>
+      <div class="param_env1_time4_kbd_sens">
+        <label for="param_env1_time4_kbd_sens">ENV1 Time4 Kbd Sens</label>
+        <input name="param_env1_time4_kbd_sens" type="range" min="-99" max="99" data-id="46"/>
+      </div>
+      <div class="params_env1_levels">
+        <div>
+          <label for="param_env1_level1">ENV1 Level 1</label>
+          <input name="param_env1_level_1" type="range" min="0" max="99" data-id="47"/>
+        </div>
+        <div>
+          <label for="param_env1_level1">ENV1 Level 2</label>
+          <input name="param_env1_level_1" type="range" min="0" max="99" data-id="48"/>
+        </div>
+        <div>
+          <label for="param_env1_level1">ENV1 Level 3</label>
+          <input name="param_env1_level_1" type="range" min="0" max="99" data-id="49"/>
+        </div>
+        <div>
+          <label for="param_env1_level1">ENV1 Level 4</label>
+          <input name="param_env1_level_1" type="range" min="0" max="99" data-id="50"/>
+        </div>
+        <div>
+          <label for="param_env1_level1">ENV1 Level 5</label>
+          <input name="param_env1_level_1" type="range" min="0" max="99" data-id="51"/>
+        </div>
+        <div class="params_env1_rates">
+          <div>
+            <label for="param_env1_rate1">ENV1 Rate1</label>
+            <input name="param_env1_rate1" type="range" min="0" max="99" data-id="52"/>
+          </div>
+          <div>
+            <label for="param_env1_rate2">ENV1 Rate2</label>
+            <input name="param_env1_rate2" type="range" min="0" max="99" data-id="53"/>
+          </div>
+          <div>
+            <label for="param_env1_rate3">ENV1 Rate3</label>
+            <input name="param_env1_rate3" type="range" min="0" max="99" data-id="54"/>
+          </div>
+          <div>
+            <label for="param_env1_rate4">ENV1 Rate4</label>
+            <input name="param_env1_rate4" type="range" min="0" max="99" data-id="55"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </main>
+
+    <footer>
+      <div id="midi_log">
+      </div>
+      <p>(C) 2016 <a href="https://twitter.com/icnagy" target="_blank">Csaba Nagy</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="dpmv3patch.js"></script>
+
+  </body>
+</html>
