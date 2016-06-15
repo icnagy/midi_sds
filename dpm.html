@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>DPM V3 Editor</title>
     <meta name="description" content="A simple webmidi patch editor for Peavey DPM V3 synth">
@@ -8,8 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="container-fluid">
     <header>
       <h1>
         Peavey DPM V3
@@ -24,24 +31,72 @@
 
       <label for="midi_channel_select">Midi Channel:</label>
       <select id="midi_channel_select">
-        <option value=0>0</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option><option value=6>6</option><option value=7>7</option><option value=8>8</option><option value=9>9</option><option value=10>10</option><option value=11>11</option><option value=12>12</option><option value=13>13</option><option value=14>14</option><option value=15>15</option><option value=16>16</option>
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="127">16</option>
       </select>
 
-    <div class="patch_number">
-      <h1>Patch Number</h1>
-      <input type="text" value="0" name="patch_number">
-    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="patch_number">
+            <h1>Patch Number</h1>
+            <input type="number" value="0" name="patch_number" min="0" max="200">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="patch_name">
+            <h1>Patch Name</h1>
+            <input type="text" value="patch0000001" size="12" maxlength="12" name="patch_name">
+          </div>
+        </div>
+      </div>
 
-    <div class="patch_name">
-      <h1>Patch Name</h1>
-      <input type="text" value="patch0000001" size="12" maxlength="12" name="patch_name">
-    </div>
-
-    <div id="osc1_param_group">
+  <div class="row">
+    <div class="col-md-4" id="osc1_param_group">
       <h2>OSC1</h2>
       <div id="param_osc1_waveshape">
         <label for="osc1_waveshape">OSC1 Wave</label>
-        <input name="osc1_waveshape" type="range" value="0" min="0" max="142" data-id="13"/>
+        <select name="osc1_waveshape" data-id="13">
+          <option value="0">SINE</option>
+          <option value="1">TRI</option>
+          <option value="2">SAW</option>
+          <option value="3">SQUARE</option>
+          <option value="4">25%PULSE</option>
+          <option value="5">20%PULSE</option>
+          <option value="6">15%PULSE</option>
+          <option value="7">10%PULSE</option>
+          <option value="8">5%PULSE</option>
+          <option value="111">SDS RAM1</option>
+          <option value="112">SDS RAM2</option>
+          <option value="113">SDS RAM3</option>
+          <option value="114">SDS RAM4</option>
+          <option value="115">SDS RAM5</option>
+          <option value="116">SDS RAM6</option>
+          <option value="117">SDS RAM7</option>
+          <option value="118">SDS RAM8</option>
+          <option value="119">SDS RAM9</option>
+          <option value="120">SDS RAM10</option>
+          <option value="121">SDS RAM11</option>
+          <option value="122">SDS RAM12</option>
+          <option value="123">SDS RAM13</option>
+          <option value="124">SDS RAM14</option>
+          <option value="125">SDS RAM15</option>
+          <option value="126">SDS RAM16</option>
+          <option value="127">SDS RAM17</option>
+          <option value="128">SDS RAM18</option>
+          <option value="129">SDS RAM19</option>
+          <option value="130">SDS RAM20</option>
+          <option value="131">SDS RAM21</option>
+          <option value="132">SDS RAM22</option>
+          <option value="133">SDS RAM23</option>
+          <option value="134">SDS RAM24</option>
+          <option value="135">SDS RAM25</option>
+          <option value="136">SDS RAM26</option>
+          <option value="137">SDS RAM27</option>
+          <option value="138">SDS RAM28</option>
+          <option value="139">SDS RAM29</option>
+          <option value="140">SDS RAM30</option>
+          <option value="141">SDS RAM31</option>
+          <option value="142">SDS RAM32</option>
+        </select>
       </div>
       <div id="param_osc1_coarse_tune">
         <label for="osc1_coarse_tune">OSC1 Coarse</label>
@@ -53,7 +108,21 @@
       </div>
       <div id="param_osc1_pitch_mod1">
         <label for="osc1_pitch_mod1">osc1 pitch_mod1</label>
-        <input name="osc1_pitch_mod1" type="range" min="0" max="12" data-id="16"/>
+        <select name="osc1_pitch_mod1" data-id="16">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_osc1_sensitivity_to_mod1">
         <label for="osc1_sensitivity_to_mod1">osc1 sensitivity_to_mod1</label>
@@ -61,19 +130,48 @@
       </div>
       <div id="param_osc1_pitch_mod2">
         <label for="osc1_pitch_mod2">osc1 pitch_mod2</label>
-        <input name="osc1_pitch_mod2" type="range" min="0" max="12" data-id="18"/>
+        <select name="osc1_pitch_mod2" data-id="18">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_osc1_sensitivity_to_mod2">
         <label for="osc1_sensitivity_to_mod2">osc1 sensitivity_to_mod2</label>
         <input name="osc1_sensitivity_to_mod2" type="range" min="-99" max="99" data-id="19"/>
       </div>
+      <h2>DCA1</h2>
       <div id="param_dca1_level_scalar">
         <label for="dca1_level_scalar">dca1_level_scalar</label>
         <input name="dca1_level_scalar" type="range" min="0" max="99" data-id="20"/>
       </div>
       <div id="param_dca1_level_mod1">
         <label for="dca1_level_mod1">dca1_level_mod1</label>
-        <input name="dca1_level_mod1" type="range" min="0" max="12" data-id="21"/>
+        <select name="dca1_level_mod1" data-id="21">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_dca1_sensitivity_to_mod1">
         <label for="dca1_sensitivity_to_mod1">dca1_sensitivity_to_mod1</label>
@@ -81,18 +179,74 @@
       </div>
       <div id="param_dca1_level_mod2">
         <label for="dca1_level_mod2">dca1_level_mod2</label>
-        <input name="dca1_level_mod2" type="range" min="0" max="12" data-id="23"/>
+        <select name="dca1_level_mod2" data-id="23">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_dca1_sensitivity_to_mod2">
         <label for="dca1_sensitivity_to_mod2">dca1_sensitivity_to_mod2</label>
         <input name="dca1_sensitivity_to_mod2" type="range" min="0" max="99" data-id="24"/>
       </div>
     </div>
-    <div id="osc2_param_group">
+    <div  class="col-md-4" id="osc2_param_group">
       <h2>OSC2</h2>
       <div id="param_osc2_waveshape">
         <label for="osc2_waveshape">OSC2 Wave</label>
-        <input name="osc2_waveshape" type="range" value="0" min="0" max="142" data-id="25"/>
+        <select name="osc2_waveshape" data-id="25">
+          <option value="0">SINE</option>
+          <option value="1">TRI</option>
+          <option value="2">SAW</option>
+          <option value="3">SQUARE</option>
+          <option value="4">25%PULSE</option>
+          <option value="5">20%PULSE</option>
+          <option value="6">15%PULSE</option>
+          <option value="7">10%PULSE</option>
+          <option value="8">5%PULSE</option>
+          <option value="111">SDS RAM1</option>
+          <option value="112">SDS RAM2</option>
+          <option value="113">SDS RAM3</option>
+          <option value="114">SDS RAM4</option>
+          <option value="115">SDS RAM5</option>
+          <option value="116">SDS RAM6</option>
+          <option value="117">SDS RAM7</option>
+          <option value="118">SDS RAM8</option>
+          <option value="119">SDS RAM9</option>
+          <option value="120">SDS RAM10</option>
+          <option value="121">SDS RAM11</option>
+          <option value="122">SDS RAM12</option>
+          <option value="123">SDS RAM13</option>
+          <option value="124">SDS RAM14</option>
+          <option value="125">SDS RAM15</option>
+          <option value="126">SDS RAM16</option>
+          <option value="127">SDS RAM17</option>
+          <option value="128">SDS RAM18</option>
+          <option value="129">SDS RAM19</option>
+          <option value="130">SDS RAM20</option>
+          <option value="131">SDS RAM21</option>
+          <option value="132">SDS RAM22</option>
+          <option value="133">SDS RAM23</option>
+          <option value="134">SDS RAM24</option>
+          <option value="135">SDS RAM25</option>
+          <option value="136">SDS RAM26</option>
+          <option value="137">SDS RAM27</option>
+          <option value="138">SDS RAM28</option>
+          <option value="139">SDS RAM29</option>
+          <option value="140">SDS RAM30</option>
+          <option value="141">SDS RAM31</option>
+          <option value="142">SDS RAM32</option>
+        </select>
       </div>
       <div id="param_osc2_coarse_tune">
         <label for="osc2_coarse_tune">OSC2 Coarse</label>
@@ -104,7 +258,21 @@
       </div>
       <div id="param_osc2_pitch_mod1">
         <label for="osc2_pitch_mod1">osc2 pitch_mod1</label>
-        <input name="osc2_pitch_mod1" type="range" min="0" max="12" data-id="28"/>
+        <select name="osc2_pitch_mod1" data-id="28">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_osc2_sensitivity_to_mod1">
         <label for="osc2_sensitivity_to_mod1">osc2 sensitivity_to_mod1</label>
@@ -112,19 +280,48 @@
       </div>
       <div id="param_osc2_pitch_mod2">
         <label for="osc2_pitch_mod2">osc2 pitch_mod2</label>
-        <input name="osc2_pitch_mod2" type="range" min="0" max="12" data-id="30"/>
+        <select name="osc2_pitch_mod2" data-id="30">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_osc2_sensitivity_to_mod2">
         <label for="osc2_sensitivity_to_mod2">osc2 sensitivity_to_mod2</label>
         <input name="osc2_sensitivity_to_mod2" type="range" min="-99" max="99" data-id="31"/>
       </div>
+      <h2>DCA2</h2>
       <div id="param_dca2_level_scalar">
         <label for="dca2_level_scalar">dca2_level_scalar</label>
         <input name="dca2_level_scalar" type="range" min="0" max="99" data-id="32"/>
       </div>
       <div id="param_dca2_level_mod1">
         <label for="dca2_level_mod1">dca2_level_mod1</label>
-        <input name="dca2_level_mod1" type="range" min="0" max="12" data-id="33"/>
+        <select name="dca2_level_mod1" data-id="33">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_dca2_sensitivity_to_mod1">
         <label for="dca2_sensitivity_to_mod1">dca2_sensitivity_to_mod1</label>
@@ -132,14 +329,29 @@
       </div>
       <div id="param_dca2_level_mod2">
         <label for="dca2_level_mod2">dca2_level_mod2</label>
-        <input name="dca2_level_mod2" type="range" min="0" max="12" data-id="35"/>
+        <select name="dca2_level_mod2" data-id="35">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_dca2_sensitivity_to_mod2">
         <label for="dca2_sensitivity_to_mod2">dca2_sensitivity_to_mod2</label>
         <input name="dca2_sensitivity_to_mod2" type="range" min="0" max="99" data-id="36"/>
       </div>
     </div>
-    <div class="filter_params">
+
+    <div class="col-md-3" id="filter_params">
       <h2>Filter</h2>
       <div class="param_filter_resonance">
         <label for="filter_resonance">Filter Resonance</label>
@@ -152,7 +364,21 @@
 
       <div class="param_filter_cutoff_mod1">
         <label for="filter_cutoff_mod1">Filter cutoff Mod1</label>
-        <input name="filter_cutoff_mod1" type="range" min="0" max="12" data-id="39"/>
+        <select name="filter_cutoff_mod1" data-id="39">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_filter_cutoff_sensitivity_to_mod1">
         <label for="filter_cutoff_sensitivity_to_mod1">filter_cutoff_sensitivity_to_mod1</label>
@@ -161,7 +387,21 @@
 
       <div class="param_filter_cutoff_mod2">
         <label for="filter_cutoff_mod2">Filter cutoff Mod2</label>
-        <input name="filter_cutoff_mod2" type="range" min="0" max="12" data-id="41"/>
+        <select name="filter_cutoff_mod2" data-id="41">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
       </div>
       <div id="param_filter_cutoff_sensitivity_to_mod2">
         <label for="filter_cutoff_sensitivity_to_mod2">filter_cutoff_sensitivity_to_mod2</label>
@@ -169,7 +409,10 @@
       </div>
     </div>
 
-    <div class="env1_params">
+  </div>
+
+  <div class="row">
+    <div class="col-md-3" id="env1_params">
       <h2>ENV1</h2>
       <div class="param_env1_level_vel_sens">
         <label for="param_env1_level_vel_sens">ENV1 Level Vel Sens</label>
@@ -188,6 +431,7 @@
         <input name="param_env1_time4_kbd_sens" type="range" min="-99" max="99" data-id="46"/>
       </div>
       <div class="params_env1_levels">
+        <h3>Levels</h3>
         <div>
           <label for="param_env1_level1">ENV1 Level 1</label>
           <input name="param_env1_level_1" type="range" min="0" max="99" data-id="47"/>
@@ -208,26 +452,413 @@
           <label for="param_env1_level1">ENV1 Level 5</label>
           <input name="param_env1_level_1" type="range" min="0" max="99" data-id="51"/>
         </div>
-        <div class="params_env1_rates">
-          <div>
-            <label for="param_env1_rate1">ENV1 Rate1</label>
-            <input name="param_env1_rate1" type="range" min="0" max="99" data-id="52"/>
-          </div>
-          <div>
-            <label for="param_env1_rate2">ENV1 Rate2</label>
-            <input name="param_env1_rate2" type="range" min="0" max="99" data-id="53"/>
-          </div>
-          <div>
-            <label for="param_env1_rate3">ENV1 Rate3</label>
-            <input name="param_env1_rate3" type="range" min="0" max="99" data-id="54"/>
-          </div>
-          <div>
-            <label for="param_env1_rate4">ENV1 Rate4</label>
-            <input name="param_env1_rate4" type="range" min="0" max="99" data-id="55"/>
-          </div>
+      </div>
+      <div class="params_env1_rates">
+        <h3>Rates</h3>
+        <div>
+          <label for="param_env1_rate1">ENV1 Rate1</label>
+          <input name="param_env1_rate1" type="range" min="0" max="99" data-id="52"/>
+        </div>
+        <div>
+          <label for="param_env1_rate2">ENV1 Rate2</label>
+          <input name="param_env1_rate2" type="range" min="0" max="99" data-id="53"/>
+        </div>
+        <div>
+          <label for="param_env1_rate3">ENV1 Rate3</label>
+          <input name="param_env1_rate3" type="range" min="0" max="99" data-id="54"/>
+        </div>
+        <div>
+          <label for="param_env1_rate4">ENV1 Rate4</label>
+          <input name="param_env1_rate4" type="range" min="0" max="99" data-id="55"/>
         </div>
       </div>
     </div>
+    <div class="col-md-3" id="env2_params">
+      <h2>ENV2</h2>
+      <div class="param_env2_level_vel_sens">
+        <label for="param_env2_level_vel_sens">ENV2 Level Vel Sens</label>
+        <input name="param_env2_level_vel_sens" type="range" min="-99" max="99" data-id="56"/>
+      </div>
+      <div class="param_env2_level_kbd_sens">
+        <label for="param_env2_level_kbd_sens">ENV2 Level Kbd Sens</label>
+        <input name="param_env2_level_kbd_sens" type="range" min="-99" max="99" data-id="57"/>
+      </div>
+      <div class="param_env2_time1_vel_sens">
+        <label for="param_env2_time1_vel_sens">ENV2 Time1 Vel Sens</label>
+        <input name="param_env2_time1_vel_sens" type="range" min="-99" max="99" data-id="58"/>
+      </div>
+      <div class="param_env2_time4_kbd_sens">
+        <label for="param_env2_time4_kbd_sens">ENV2 Time4 Kbd Sens</label>
+        <input name="param_env2_time4_kbd_sens" type="range" min="-99" max="99" data-id="59"/>
+      </div>
+      <div class="params_env2_levels">
+        <h3>Levels</h3>
+        <div>
+          <label for="param_env2_level1">ENV2 Level 1</label>
+          <input name="param_env2_level_1" type="range" min="0" max="99" data-id="60"/>
+        </div>
+        <div>
+          <label for="param_env2_level1">ENV2 Level 2</label>
+          <input name="param_env2_level_1" type="range" min="0" max="99" data-id="61"/>
+        </div>
+        <div>
+          <label for="param_env2_level1">ENV2 Level 3</label>
+          <input name="param_env2_level_1" type="range" min="0" max="99" data-id="62"/>
+        </div>
+        <div>
+          <label for="param_env2_level1">ENV2 Level 4</label>
+          <input name="param_env2_level_1" type="range" min="0" max="99" data-id="63"/>
+        </div>
+        <div>
+          <label for="param_env2_level1">ENV2 Level 5</label>
+          <input name="param_env2_level_1" type="range" min="0" max="99" data-id="64"/>
+        </div>
+      </div>
+      <div class="params_env2_rates">
+        <h3>Rates</h3>
+        <div>
+          <label for="param_env2_rate1">ENV2 Rate1</label>
+          <input name="param_env2_rate1" type="range" min="0" max="99" data-id="65"/>
+        </div>
+        <div>
+          <label for="param_env2_rate2">ENV2 Rate2</label>
+          <input name="param_env2_rate2" type="range" min="0" max="99" data-id="66"/>
+        </div>
+        <div>
+          <label for="param_env2_rate3">ENV2 Rate3</label>
+          <input name="param_env2_rate3" type="range" min="0" max="99" data-id="67"/>
+        </div>
+        <div>
+          <label for="param_env2_rate4">ENV2 Rate4</label>
+          <input name="param_env2_rate4" type="range" min="0" max="99" data-id="68"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" id="env3_params">
+      <h2>ENV3</h2>
+      <div class="param_env3_level_vel_sens">
+        <label for="param_env3_level_vel_sens">ENV3 Level Vel Sens</label>
+        <input name="param_env3_level_vel_sens" type="range" min="-99" max="99" data-id="69"/>
+      </div>
+      <div class="param_env3_level_kbd_sens">
+        <label for="param_env3_level_kbd_sens">ENV3 Level Kbd Sens</label>
+        <input name="param_env3_level_kbd_sens" type="range" min="-99" max="99" data-id="70"/>
+      </div>
+      <div class="param_env3_time1_vel_sens">
+        <label for="param_env3_time1_vel_sens">ENV3 Time1 Vel Sens</label>
+        <input name="param_env3_time1_vel_sens" type="range" min="-99" max="99" data-id="71"/>
+      </div>
+      <div class="param_env3_time4_kbd_sens">
+        <label for="param_env3_time4_kbd_sens">ENV3 Time4 Kbd Sens</label>
+        <input name="param_env3_time4_kbd_sens" type="range" min="-99" max="99" data-id="72"/>
+      </div>
+      <div class="params_env3_levels">
+        <h3>Levels</h3>
+        <div>
+          <label for="param_env3_level1">ENV3 Level 1</label>
+          <input name="param_env3_level_1" type="range" min="0" max="99" data-id="73"/>
+        </div>
+        <div>
+          <label for="param_env3_level1">ENV3 Level 2</label>
+          <input name="param_env3_level_1" type="range" min="0" max="99" data-id="74"/>
+        </div>
+        <div>
+          <label for="param_env3_level1">ENV3 Level 3</label>
+          <input name="param_env3_level_1" type="range" min="0" max="99" data-id="75"/>
+        </div>
+        <div>
+          <label for="param_env3_level1">ENV3 Level 4</label>
+          <input name="param_env3_level_1" type="range" min="0" max="99" data-id="76"/>
+        </div>
+        <div>
+          <label for="param_env3_level1">ENV3 Level 5</label>
+          <input name="param_env3_level_1" type="range" min="0" max="99" data-id="77"/>
+        </div>
+      </div>
+      <div class="params_env3_rates">
+        <h3>Rates</h3>
+        <div>
+          <label for="param_env3_rate1">ENV3 Rate1</label>
+          <input name="param_env3_rate1" type="range" min="0" max="99" data-id="78"/>
+        </div>
+        <div>
+          <label for="param_env3_rate2">ENV3 Rate2</label>
+          <input name="param_env3_rate2" type="range" min="0" max="99" data-id="79"/>
+        </div>
+        <div>
+          <label for="param_env3_rate3">ENV3 Rate3</label>
+          <input name="param_env3_rate3" type="range" min="0" max="99" data-id="80"/>
+        </div>
+        <div>
+          <label for="param_env3_rate4">ENV3 Rate4</label>
+          <input name="param_env3_rate4" type="range" min="0" max="99" data-id="81"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" id="env4_params">
+      <h2>ENV4(AMPENV)</h2>
+      <div class="param_env4_level_vel_sens">
+        <label for="param_env4_level_vel_sens">ENV4 Level Vel Sens</label>
+        <input name="param_env4_level_vel_sens" type="range" min="-99" max="99" data-id="82"/>
+      </div>
+      <div class="param_env4_level_kbd_sens">
+        <label for="param_env4_level_kbd_sens">ENV4 Level Kbd Sens</label>
+        <input name="param_env4_level_kbd_sens" type="range" min="-99" max="99" data-id="83"/>
+      </div>
+      <div class="param_env4_time1_vel_sens">
+        <label for="param_env4_time1_vel_sens">ENV4 Time1 Vel Sens</label>
+        <input name="param_env4_time1_vel_sens" type="range" min="-99" max="99" data-id="84"/>
+      </div>
+      <div class="param_env4_time4_kbd_sens">
+        <label for="param_env4_time4_kbd_sens">ENV4 Time4 Kbd Sens</label>
+        <input name="param_env4_time4_kbd_sens" type="range" min="-99" max="99" data-id="85"/>
+      </div>
+      <div class="params_env4_levels">
+        <h3>Levels</h3>
+        <div>
+          <label for="param_env4_level1">ENV4 Level 1</label>
+          <input name="param_env4_level_1" type="range" min="0" max="99" data-id="86"/>
+        </div>
+        <div>
+          <label for="param_env4_level1">ENV4 Level 2</label>
+          <input name="param_env4_level_1" type="range" min="0" max="99" data-id="87"/>
+        </div>
+        <div>
+          <label for="param_env4_level1">ENV4 Level 3</label>
+          <input name="param_env4_level_1" type="range" min="0" max="99" data-id="88"/>
+        </div>
+        <div>
+          <label for="param_env4_level1">ENV4 Level 4</label>
+          <input name="param_env4_level_1" type="range" min="0" max="99" data-id="89"/>
+        </div>
+        <div>
+          <label for="param_env4_level1">ENV4 Level 5</label>
+          <input name="param_env4_level_1" type="range" min="0" max="0"/>
+        </div>
+      </div>
+      <div class="params_env4_rates">
+        <h3>Rates</h3>
+        <div>
+          <label for="param_env4_rate1">ENV4 Rate1</label>
+          <input name="param_env4_rate1" type="range" min="0" max="99" data-id="90"/>
+        </div>
+        <div>
+          <label for="param_env4_rate2">ENV4 Rate2</label>
+          <input name="param_env4_rate2" type="range" min="0" max="99" data-id="91"/>
+        </div>
+        <div>
+          <label for="param_env4_rate3">ENV4 Rate3</label>
+          <input name="param_env4_rate3" type="range" min="0" max="99" data-id="92"/>
+        </div>
+        <div>
+          <label for="param_env4_rate4">ENV4 Rate4</label>
+          <input name="param_env4_rate4" type="range" min="0" max="99" data-id="93"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6" id="lfo1_params">
+      <h2>LFO1</h2>
+      <div class="form-group">
+        <label for="lfo1_rate">Lfo1 Rate</label>
+        <input type="range" name="lfo1_rate" value="0" min="0" max="99" data-id="94">
+      </div>
+
+      <div class="form-group">
+        <label for="lfo1_rate_mod1">LFO Rate Mod1</label>
+        <select name="lfo1_rate_mod1" id="lfo1_rate_mod1" data-id="95">
+          <option value="0">Off</option>
+          <option value="1">Pressure</option>
+          <option value="2">Mod Wheel</option>
+          <option value="3">ENV1</option>
+          <option value="4">ENV2</option>
+          <option value="5">ENV3</option>
+          <option value="6">ENV4</option>
+          <option value="7">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+
+      <label for="lfo1_rate_sens_to_mod1">LFO1 Rate Sens To Mod1</label>
+      <input type="range" min="-99" max="+99" name="lfo1_rate_sens_to_mod1" data-id="96">
+
+      <div class="form-group">
+        <label for="lfo1_amount">LFO1 Amount</label>
+        <input type="range" min="0" max="99" name="lfo1_amount" data-id="97">
+      </div>
+
+      <div class="form-group">
+        <label for="lfo1_amount_mod1">LFO1 Amount Mod1</label>
+        <select name="lfo1_amount_mod1" id="lfo1_amount_mod1" data-id="98">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lfo1_amount_mod2">LFO1 Amount Mod2</label>
+        <select name="lfo1_amount_mod2" id="lfo1_amount_mod2" data-id="99">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO1</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="lfo1_amount_sens_to_mod1">LFO1 Amount Sens To Mod1</label>
+        <input type="range" min="-99" max="99" name="lfo1_amount_sens_to_mod1" data-id="100">
+      </div>
+      <div class="form-group">
+        <label for="lfo1_amount_sens_to_mod2">LFO1 Amount Sens To Mod2</label>
+        <input type="range" min="-99" max="99" name="lfo1_amount_sens_to_mod2" data-id="101">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo1_delay_count">LFO1 Delay Count (x5ms)</label>
+        <input type="range" min="0" max="99" name="lfo1_delay_count" data-id="102">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo1_fade_count">LFO1 Fade Count</label>
+        <input type="range" min="0" max="99" name="lfo1_fade_count" data-id="103">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo1_shape">LFO1 Shape</label>
+        <select name="lfo1_shape" id="lfo1_shape" data-id="104">
+          <option value="0">TRI</option>
+          <option value="1">RAMP</option>
+          <option value="2">SAW</option>
+          <option value="3">SQUARE</option>
+          <option value="4">RAND</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6" id="lfo2_params">
+      <h2>LFO2</h2>
+
+      <div class="form-group">
+        <label for="lfo2_rate">Lfo2 Rate</label>
+        <input type="range" name="lfo2_rate" value="0" min="0" max="99" data-id="105">
+      </div>
+
+      <div class="form-group">
+        <label for="lfo2_rate_mod1">LFO Rate Mod1</label>
+        <select name="lfo2_rate_mod1" id="lfo2_rate_mod1" data-id="106">
+          <option value="0">Off</option>
+          <option value="1">Pressure</option>
+          <option value="2">Mod Wheel</option>
+          <option value="3">ENV1</option>
+          <option value="4">ENV2</option>
+          <option value="5">ENV3</option>
+          <option value="6">ENV4</option>
+          <option value="7">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+
+      <label for="lfo2_rate_sens_to_mod1">LFO2 Rate Sens To Mod1</label>
+      <input type="range" min="-99" max="+99" name="lfo2_rate_sens_to_mod1" data-id="107">
+
+      <div class="form-group">
+        <label for="lfo2_amount">LFO2 Amount</label>
+        <input type="range" min="0" max="99" name="lfo2_amount" data-id="108">
+      </div>
+
+      <div class="form-group">
+        <label for="lfo2_amount_mod1">LFO2 Amount Mod1</label>
+        <select name="lfo2_amount_mod1" id="lfo2_amount_mod1" data-id="109">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO2</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="lfo2_amount_mod2">LFO2 Amount Mod2</label>
+        <select name="lfo2_amount_mod2" id="lfo2_amount_mod2" data-id="110">
+          <option value="0">Off</option>
+          <option value="1">Velocity</option>
+          <option value="2">Keyboard</option>
+          <option value="3">Pressure</option>
+          <option value="4">ENV1</option>
+          <option value="5">ENV2</option>
+          <option value="6">ENV3</option>
+          <option value="7">ENV4</option>
+          <option value="8">LFO2</option>
+          <option value="9">LFO2</option>
+          <option value="10">Wheel</option>
+          <option value="11">Pedal</option>
+          <option value="12">XCtrl</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="lfo2_amount_sens_to_mod1">LFO2 Amount Sens To Mod1</label>
+        <input type="range" min="-99" max="99" name="lfo2_amount_sens_to_mod1" data-id="111">
+      </div>
+      <div class="form-group">
+        <label for="lfo2_amount_sens_to_mod2">LFO2 Amount Sens To Mod2</label>
+        <input type="range" min="-99" max="99" name="lfo2_amount_sens_to_mod2" data-id="112">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo2_delay_count">LFO2 Delay Count (x5ms)</label>
+        <input type="range" min="0" max="99" name="lfo2_delay_count" data-id="113">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo2_fade_count">LFO2 Fade Count</label>
+        <input type="range" min="0" max="99" name="lfo2_fade_count" data-id="114">
+      </div>
+
+      <div class="form_group">
+        <label for="lfo2_shape">LFO2 Shape</label>
+        <select name="lfo2_shape" id="lfo2_shape" data-id="115">
+          <option value="0">TRI</option>
+          <option value="1">RAMP</option>
+          <option value="2">SAW</option>
+          <option value="3">SQUARE</option>
+          <option value="4">RAND</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+label[for=""]{}+input[type="range" min="" max="" name=""]
+label[for=""]{}+select[id=""]>option[value=""]{A}*6
 
     </main>
 
