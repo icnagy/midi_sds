@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Midi SDS transfer tool</title>
+  <meta name="description" content="A simple web app using WebMidi to send samples to SDS capable synths/samplers">
+  <meta name="keywords" content="midi sds sample tool upload wav wave">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container-fluid">
+    <h1>
+      Drum kits
+    </h1>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-md-4 form-group">
+          <label for="midi_port_select">Select Midi Port:</label>
+          <select id="midi_port_select">
+          </select>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="midi_channel_select">Midi Channel:</label>
+          <select id="midi_channel_select">
+            <option value=0>0</option>        <option value=1>1</option>        <option value=2>2</option>        <option value=3>3</option>
+            <option value=4>4</option>        <option value=5>5</option>        <option value=6>6</option>        <option value=7>7</option>
+            <option value=8>8</option>        <option value=9>9</option>        <option value=10>10</option>        <option value=11>11</option>
+            <option value=12>12</option>        <option value=13>13</option>        <option value=14>14</option>        <option value=15>15</option>
+            <option value=16>16</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="step_one" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">1. Upload your samples</h3>
+      </div>
+      <div class="panel-body" id="sample_target">
+        Drop your samples here
+      </div>
+    </div>
+
+    <div id="step_two" class="panel panel-default" style="display: none">
+      <div class="panel-heading">
+        <h3 class="panel-title">2. Transfer your samples</h3>
+      </div>
+      <div class="panel-body" id="sample_transfer_buttons">
+        <p id="buttons_help_text">Press the buttons in low-to-high key order and wait for the transfer to complete.</p>
+      </div>
+    </div>
+
+    <div id="step_three" class="panel panel-default" style="display: none">
+      <div class="panel-heading">
+        <h3 class="panel-title">3. Accept sample on device</h3>
+      </div>
+      <div class="panel-body">
+        <p id="settings_help">When the transfer is finished press EXEC to save the sample.</p>
+      </div>
+    </div>
+
+    <div id="step_four" class="panel panel-default" style="display: block">
+      <div class="panel-heading">
+        <h3 class="panel-title">4. Setup Drum kit 1</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-1 form-group">
+            <label >Wave</label>
+          </div>
+          <div class="col-md-1 form-group">
+            <label>Top key</label>
+          </div>
+          <div class="col-md-1 form-group">
+            <label>Tune value</label>
+          </div>
+          <div class="col-md-2 form-group">
+            <label>Decay</label>
+          </div>
+          <div class="col-md-2 form-group">
+            <label>Pan</label>
+          </div>
+          <div class="col-md-2 form-group">
+            <label>Level</label>
+          </div>
+          <div class="col-md-2 form-group">
+            <label>FX2 Send</label>
+          </div>
+          <div class="col-md-1 form-group">
+            <label>Output</label>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_1">
+          <div class="col-md-1 form-group">
+            <label for="wave_1">Wave</label>
+            <select name="wave_1" id="wave_1" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_1">Top key</label>
+            <select name="note_1" id="note_1" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_1">Tune value</label>
+            <input type="number" id="tune_1" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_1">Decay</label>
+            <input type="range" id="decay_1" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_1">Pan</label>
+            <input type="range" id="pan_1" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_1">Level</label>
+            <input type="range" id="level_1" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_1">FX2 Send</label>
+            <input type="range" id="fx_send_1" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_1_ouput">Output</label>
+            <select name="output_1" id="output_1" data-id="7">
+              <option value="1" selected="true">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_2">
+          <div class="col-md-1 form-group">
+            <label for="wave_2">Wave</label>
+            <select name="wave_2" id="wave_2" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_2">Top key</label>
+            <select name="note_2" id="note_2" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_2">Tune value</label>
+            <input type="number" id="tune_2" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_2">Decay</label>
+            <input type="range" id="decay_2" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_2">Pan</label>
+            <input type="range" id="pan_2" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_2">Level</label>
+            <input type="range" id="level_2" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_2">FX2 Send</label>
+            <input type="range" id="fx_send_2" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_2_ouput">Output</label>
+            <select name="output_2" id="output_2" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2" selected="true">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_3">
+          <div class="col-md-1 form-group">
+            <label for="wave_3">Wave</label>
+            <select name="wave_3" id="wave_3" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_3">Top key</label>
+            <select name="note_3" id="note_3" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_3">Tune value</label>
+            <input type="number" id="tune_3" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_3">Decay</label>
+            <input type="range" id="decay_3" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_3">Pan</label>
+            <input type="range" id="pan_3" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_3">Level</label>
+            <input type="range" id="level_3" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_3">FX2 Send</label>
+            <input type="range" id="fx_send_3" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_3_ouput">Output</label>
+            <select name="output_3" id="output_3" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2" selected="true">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_4">
+          <div class="col-md-1 form-group">
+            <label for="wave_4">Wave</label>
+            <select name="wave_4" id="wave_4" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_4">Top key</label>
+            <select name="note_4" id="note_4" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_4">Tune value</label>
+            <input type="number" id="tune_4" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_4">Decay</label>
+            <input type="range" id="decay_4" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_4">Pan</label>
+            <input type="range" id="pan_4" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_4">Level</label>
+            <input type="range" id="level_4" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_4">FX2 Send</label>
+            <input type="range" id="fx_send_4" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_4_ouput">Output</label>
+            <select name="output_4" id="output_4" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3" selected="true">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_5">
+          <div class="col-md-1 form-group">
+            <label for="wave_5">Wave</label>
+            <select name="wave_5" id="wave_5" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_5">Top key</label>
+            <select name="note_5" id="note_5" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_5">Tune value</label>
+            <input type="number" id="tune_5" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_5">Decay</label>
+            <input type="range" id="decay_5" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_5">Pan</label>
+            <input type="range" id="pan_5" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_5">Level</label>
+            <input type="range" id="level_5" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_5">FX2 Send</label>
+            <input type="range" id="fx_send_5" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_5_ouput">Output</label>
+            <select name="output_5" id="output_5" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3" selected="true">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_6">
+          <div class="col-md-1 form-group">
+            <label for="wave_6">Wave</label>
+            <select name="wave_6" id="wave_6" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_6">Top key</label>
+            <select name="note_6" id="note_6" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_6">Tune value</label>
+            <input type="number" id="tune_6" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_6">Decay</label>
+            <input type="range" id="decay_6" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_6">Pan</label>
+            <input type="range" id="pan_6" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_6">Level</label>
+            <input type="range" id="level_6" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_6">FX2 Send</label>
+            <input type="range" id="fx_send_6" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_6_ouput">Output</label>
+            <select name="output_6" id="output_6" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3" selected="true">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_7">
+          <div class="col-md-1 form-group">
+            <label for="wave_7">Wave</label>
+            <select name="wave_7" id="wave_7" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_7">Top key</label>
+            <select name="note_7" id="note_7" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_7">Tune value</label>
+            <input type="number" id="tune_7" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_7">Decay</label>
+            <input type="range" id="decay_7" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_7">Pan</label>
+            <input type="range" id="pan_7" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_7">Level</label>
+            <input type="range" id="level_7" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_7">FX2 Send</label>
+            <input type="range" id="fx_send_7" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_7_ouput">Output</label>
+            <select name="output_7" id="output_7" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_8">
+          <div class="col-md-1 form-group">
+            <label for="wave_8">Wave</label>
+            <select name="wave_8" id="wave_8" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_8">Top key</label>
+            <select name="note_8" id="note_8" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_8">Tune value</label>
+            <input type="number" id="tune_8" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_8">Decay</label>
+            <input type="range" id="decay_8" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_8">Pan</label>
+            <input type="range" id="pan_8" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_8">Level</label>
+            <input type="range" id="level_8" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_8">FX2 Send</label>
+            <input type="range" id="fx_send_8" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_8_ouput">Output</label>
+            <select name="output_8" id="output_8" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" id="drum_piece_9">
+          <div class="col-md-1 form-group">
+            <label for="wave_9">Wave</label>
+            <select name="wave_9" id="wave_9" data-id="0">
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="note_9">Top key</label>
+            <select name="note_9" id="note_9" data-id="1">
+              <option value="1">C 2</option>
+              <option value="2">C#2</option>
+              <option value="3">D 2</option>
+              <option value="4">D#2</option>
+              <option value="5">E 2</option>
+              <option value="6">F 2</option>
+              <option value="7">F#2</option>
+              <option value="8">G 2</option>
+              <option value="9">G#2</option>
+              <option value="10">A 2</option>
+              <option value="11">A#2</option>
+              <option value="12">B 2</option>
+            </select>
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="tune_9">Tune value</label>
+            <input type="number" id="tune_9" min="-36" max="36" value="0" data-id="2">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="decay_9">Decay</label>
+            <input type="range" id="decay_9" min="0" max="99" value="99" data-id="3">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="pan_9">Pan</label>
+            <input type="range" id="pan_9" min="-99" max="99" data-id="4">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="level_9">Level</label>
+            <input type="range" id="level_9" min="0" max="99" value="75" data-id="5">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="fx_send_9">FX2 Send</label>
+            <input type="range" id="fx_send_9" min="0" max="99" value="0" data-id="6">
+          </div>
+          <div class="col-md-1 form-group">
+            <label for="piece_9_ouput">Output</label>
+            <select name="output_9" id="output_9" data-id="7">
+              <option value="1">1-2</option>
+              <option value="2">3-4</option>
+              <option value="3">5-6</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-primary btn-lg">Upload Drum Kit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div id="midi_log">
+  </div>
+  <p>(C) 2016 <a href="https://twitter.com/icnagy" target="_blank">Csaba Nagy</a></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+crossorigin="anonymous"></script>
+<script src="drums.js"></script>
+
+</body>
+</html>
