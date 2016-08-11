@@ -30,6 +30,7 @@ $(function() {
   }
 
   function listInputsAndOutputs( midiAccess ) {
+    _gs('event', 'Listing midi in-out');
     midiAccess.outputs.forEach(function(output){
       var option = document.createElement("option");
       option.value = output.id;
@@ -203,6 +204,7 @@ $(function() {
   if(navigator.requestMIDIAccess != undefined) {
     navigator.requestMIDIAccess( { sysex: true } ).then( onMIDISuccess, onMIDIFailure );
   } else {
+    _gs('event', 'Browser not supported');
     alert("Your browser is probably not supported. Please try Chrome.");
   }
 });
